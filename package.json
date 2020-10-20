@@ -1,0 +1,27 @@
+{
+  "name": "readmegenerator",
+  "version": "1.0.0",
+  "description": "Create read me using node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contrabandKC/READMEGenerator.git"
+  },
+  "keywords": [
+    "readme",
+    "generator",
+    "professional"
+  ],
+  "author": "Erk Marquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/contrabandKC/READMEGenerator/issues"
+  },
+  "homepage": "https://github.com/contrabandKC/READMEGenerator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
