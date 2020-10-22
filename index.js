@@ -15,22 +15,22 @@ function prompt(){
         {
             type:"input",
             name:"description",
-            message:"What is the title of your project?"
+            message:"Provide a brief description of the project?"
         },
         {
             type:"input",
             name:"installation",
-            message:"What are your contribution guidelines?"
+            message:"What are the installation instructions?"
         },
         {
             type:"input",
             name:"usage",
-            message:"What are the test instructions your project?"
+            message:"What is the projects usage?"
         },
         {
             type:"input",
             name:"contribution",
-            message:"What are the test instructions your project?"
+            message:"Who are the contributing parties?"
         },
         {
             type:"input",
@@ -52,45 +52,57 @@ function prompt(){
 }
 
 function generateReadMe(answers){
+    let badge 
+
+    if (answers.license == "MIT") {
+        badge = "![GitHub license](https://badgen.net/github/license/micromatch/micromatch)"
+    }
+    else if (answers.license == "Apache") {
+        badge = "![GitHub license](https://badgen.net/gitlab/license/gitlab-org/omnibus-gitlab)"
+    } else if (answers.license == "GPL") {
+        badge = "![GitHub license](https://badgen.net/scoop/extras/license/deluge)"
+    } 
+
+
 return `
-    # ${answers.title}
+# ${answers.title}
 
-    ## Description
+## Description
 
-    ${answers.description}
+${answers.description}
 
-    ## Table of contents
+## Table of contents
 
-    - [Description](#Description)
-    - [Installation](#Installation)
-    - [Usage](#Usage)
-    - [Licence](#Licence)
-    - [Contributors](#Contributors)
-    - [Test](#Test)
-    - [Repository Link](#Repository)
-    - [GitHub Info](#GitHub) 
+- [Description](#Description)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Licence](#Licence)
+- [Contributors](#Contributors)
+- [Test](#Test)
+- [Repository Link](#Repository)
+- [GitHub Info](#GitHub) 
 
-    ## Installation
+## Installation
 
-    ${answers.installation}
+${answers.installation}
 
-    ## Usage
+## Usage
 
-    ${answers.usage}
+${answers.usage}
 
-    ## Licence
+## Licence
 
-    ${answers.license}
+${badge}
 
-    ## Contributors
+## Contributors
 
-    ${answers.contributors}
+${answers.contributors}
 
-    ## Test
+## Test
 
-    ## Repository Link
+## Repository Link
 
-    ## GitHub Info
+## GitHub Info
 
     `
     } 
@@ -115,5 +127,8 @@ async function init(){
     }
 
 } 
+
+// prompt()
+
 
 init()
