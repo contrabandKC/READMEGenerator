@@ -2,8 +2,10 @@ var inquirer = require('inquirer')
 var fs = require("fs")
 const util = require('util')
 const Choices = require("inquirer/lib/objects/choices")
+const axios = require('axios')
 
 const writefileAsync = util.promisify(fs.writeFile);
+// const axiosAsync = util.promisify(axios)
 
 function prompt(){
     return inquirer.prompt([
@@ -47,11 +49,17 @@ function prompt(){
                 "GPL"
             ]
         },
+        {
+            type:"input",
+            name:"git",
+            message:"WHat is your github id?",
+    
+        },
     
     ])
 }
 
-function generateReadMe(answers){
+function generateReadMe(answers, git){
     let badge 
 
     if (answers.license == "MIT") {
@@ -104,8 +112,45 @@ ${answers.contributors}
 
 ## GitHub Info
 
+![GitHub license](${git.githubImage})
+
+${git.email}
+-[Git Profile](${git.profile})
+${git.name}
+
+
+
+
     `
     } 
+
+
+function gitHub(answers){
+
+    let quaryURL = `https://api.github.com/users/${answers.git}`
+
+    axios.get(quaryURL).then((res) =>{
+        const gitHubInfo ={
+            githubImage: res.data.avatar_url,
+            email: res.data.email,
+            profile: res.data.html_url,
+            name: res.data.name
+        }
+
+
+        // console.log(res.data)
+        console.log("Axios",gitHubInfo)
+
+        return gitHubInfo
+
+    })
+    
+
+}
+
+// const gitAsync = util.promisify(gitHub);
+// const readMeAsync = util.promisify(generateReadMe);
+
 
 
 async function init(){
@@ -113,11 +158,26 @@ async function init(){
 
        const answers = await prompt()
 
-       console.log(answers)
+    //    console.log(answers)
 
-       const readme = generateReadMe(answers)
+    //    const git = await gitHub(answers)
+    let quaryURL = `https://api.github.com/users/${answers.git}`
 
-       await writefileAsync("README.md", readme)
+    const git = await axios.get(quaryURL).then((res) =>{
+        const gitHubInfo ={
+            githubImage: res.data.avatar_url,
+            email: res.data.email,
+            profile: res.data.html_url,
+            name: res.data.name
+            }
+           return gitHubInfo 
+        })
+
+        console.log(git)
+
+    const readme = await generateReadMe(answers, git)
+
+       await writefileAsync("README.md", (readme))
 
        console.log("read me is ready")
 
@@ -130,5 +190,21 @@ async function init(){
 
 // prompt()
 
-
 init()
+
+// prompt()
+//     .then(function(answers){
+//         const git = gitHub(answers)
+//         // const git = ""
+//         // console.log("return",git)
+//         return [answers, git]
+//     })
+//     .then(function(answers, git){
+//         return generateReadMe(answers, git)
+//     })
+//     .then(function(readme){
+//         writefileAsync("README.md", (readme))
+//     })
+//     .catch(function(err){
+//         console.log(err)
+//     })

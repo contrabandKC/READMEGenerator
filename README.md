@@ -1,9 +1,9 @@
 
-# afsdfsdf
+# asdsa
 
 ## Description
 
-sgdfgdf
+adsdas
 
 ## Table of contents
 
@@ -18,15 +18,15 @@ sgdfgdf
 
 ## Installation
 
-dsfgsfdhdfs
+dasd
 
 ## Usage
 
-fdhfg
+asda
 
 ## Licence
 
-![GitHub license](https://badgen.net/scoop/extras/license/deluge)
+![GitHub license](https://badgen.net/gitlab/license/gitlab-org/omnibus-gitlab)
 
 ## Contributors
 
@@ -37,5 +37,14 @@ undefined
 ## Repository Link
 
 ## GitHub Info
+
+![GitHub license](https://avatars2.githubusercontent.com/u/43430471?v=4)
+
+
+-[Git Profile](https://github.com/contrabandKC)
+Erik Marquez
+
+
+
 
     
